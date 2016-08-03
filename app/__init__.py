@@ -16,5 +16,18 @@ def create_app():
 
 
 class Application:
+
+    method_name = 'do_plugin_stuff'
+
     def __init__(self):
         self.plugins = {}
+
+
+    def do_plugins(self):
+        for plugin in self.plugins:
+            try:
+                func = getattr(self.plugins[plugin], self.method_name)
+                func()
+            except Exception, e:
+                print e
+            
